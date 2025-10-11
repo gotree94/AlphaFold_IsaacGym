@@ -120,9 +120,20 @@ conda activate isaacgym
 # PyTorch 설치
 conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia -y
 
-# Isaac Gym 설치 (다운로드 받은 파일로)
-cd ~/isaacgym/python
+# 업로드한 파일 압축 해제
+cd ~
+tar -xzf IsaacGym_Preview_4_Package.tar.gz
+cd isaacgym/python
+
+# Isaac Gym 설치
 pip install -e .
+
+# PyTorch 설치 (CUDA 12 지원)
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+
+# 테스트
+cd examples
+python joint_monkey.py
 ```
 
 
