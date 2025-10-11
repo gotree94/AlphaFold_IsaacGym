@@ -89,3 +89,36 @@ source ~/.bashrc
 conda --version
 python --version
 ```
+## Anaconda 설치 후 AlphaFold 설정
+
+```bash
+# AlphaFold 환경 생성
+conda create -n alphafold python=3.10 -y
+conda activate alphafold
+
+# 필수 패키지 (Anaconda에 이미 많이 포함됨)
+conda install numpy scipy matplotlib -y
+pip install --upgrade pip
+
+# JAX GPU 버전 설치
+pip install --upgrade "jax[cuda12]"
+
+# ColabFold 설치
+pip install colabfold[alphafold]
+```
+
+## Isaac Gym 설정
+```bash
+# Isaac Gym 환경
+conda create -n isaacgym python=3.8 -y
+conda activate isaacgym
+
+# PyTorch 설치
+conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia -y
+
+# Isaac Gym 설치 (다운로드 받은 파일로)
+cd ~/isaacgym/python
+pip install -e .
+```
+
+
