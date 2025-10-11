@@ -48,7 +48,7 @@ Sat Oct 11 14:26:31 2025
 +-----------------------------------------------------------------------------------------+
 ```
 
-# 드라이버 모듈 확인
+## 드라이버 모듈 확인
 
 ```
 lsmod | grep nvidia
@@ -64,6 +64,81 @@ ecc                    45056  2 ecdh_generic,nvidia
 video                  77824  6 nvidia_wmi_ec_backlight,asus_wmi,asus_nb_wmi,xe,i915,nvidia_modeset
 wmi                    28672  5 video,nvidia_wmi_ec_backlight,asus_wmi,wmi_bmof,mfd_aaeon
 
+```
+# Miniconda 설치
+```bash
+# Miniconda 다운로드 및 설치
+cd ~
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh
+
+# 설치 중 yes, 기본 경로 사용, yes (conda init)
+# 설치 완료 후
+source ~/.bashrc
+
+# conda 확인
+conda --version
+```
+## CUDA 환경 변수 설정
+```bash
+# .bashrc에 CUDA 경로 추가
+echo 'export PATH=/usr/lib/nvidia-cuda-toolkit/bin:$PATH' >> ~/.bashrc
+echo 'export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH' >> ~/.bashrc
+source ~/.bashrc
+```
+
+---
+
+# AlphaFold
+
+## 1. AlphaFold 설치
+```bash
+# AlphaFold 환경 생성
+conda create -n alphafold python=3.10 -y
+conda activate alphafold
+
+# 필수 패키지 설치
+conda install -c conda-forge openmm==8.0.0 pdbfixer -y
+pip install --upgrade pip
+
+# AlphaFold (ColabFold 버전 - 더 쉬움)
+pip install colabfold[alphafold]
+
+# JAX GPU 버전 설치 (CUDA 12 지원)
+pip install --upgrade "jax[cuda12]"
+```
+
+## 2. Isaac Gym 설치
+**Isaac Gym은 NVIDIA에서 직접 다운로드해야 합니다.**
+**Isaac Gym 다운로드 방법:**
+###1.NVIDIA 계정으로 다운로드:
+   * https://developer.nvidia.com/isaac-gym
+   * "Join now" 클릭하여 NVIDIA Developer 계정 생성/로그인
+   * "Download" 버튼 클릭
+   * IsaacGym_Preview_4_Package.tar.gz 다운로드
+###2.MobaXterm으로 파일 전송:
+   * MobaXterm 왼쪽 사이드바에서 파일 업로드
+   * 또는 SFTP로 전송
+###3.서버에서 설치:
+```bash
+# Isaac Gym 환경 생성
+conda create -n isaacgym python=3.8 -y
+conda activate isaacgym
+
+# 업로드한 파일 압축 해제
+cd ~
+tar -xzf IsaacGym_Preview_4_Package.tar.gz
+cd isaacgym/python
+
+# Isaac Gym 설치
+pip install -e .
+
+# PyTorch 설치 (CUDA 12 지원)
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+
+# 테스트
+cd examples
+python joint_monkey.py
 ```
 
 
