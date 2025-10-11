@@ -1,10 +1,10 @@
 # AlphaFold_IsaacGym
 
-  *✅ Isaac Gym      : 완벽 (최고 성능)
-  *✅ AlphaFold      : 완벽 (대형 단백질 처리)
-  *✅ MONAI          : 완벽 (3D 의료 영상)
-  *✅ Clara          : 완벽 (Enterprise 워크로드)
-  *⚠️ BioNeMo        : 양호 (중형 모델까지, 대형은 양자화 필요)
+  * ✅ Isaac Gym      : 완벽 (최고 성능)
+  * ✅ AlphaFold      : 완벽 (대형 단백질 처리)
+  * ✅ MONAI          : 완벽 (3D 의료 영상)
+  * ✅ Clara          : 완벽 (Enterprise 워크로드)
+  * ⚠️ BioNeMo        : 양호 (중형 모델까지, 대형은 양자화 필요)
 
 
 ## Open Kernel Module 드라이버 설치
