@@ -92,6 +92,8 @@ python --version
 ## Anaconda 설치 후 AlphaFold 설정
 
 ```bash
+conda deactivate
+
 # AlphaFold 환경 생성
 conda create -n alphafold python=3.10 -y
 conda activate alphafold
@@ -109,6 +111,8 @@ pip install colabfold[alphafold]
 
 ## Isaac Gym 설정
 ```bash
+conda deactivate
+
 # Isaac Gym 환경
 conda create -n isaacgym python=3.8 -y
 conda activate isaacgym
