@@ -109,6 +109,71 @@ pip install --upgrade "jax[cuda12]"
 pip install colabfold[alphafold]
 ```
 
+```
+mkdir ~/alphafold_test
+cd ~/alphafold_test
+```
+
+
+```
+cat > test.fasta
+```
+
+   * (‘>Test’ 는 단백질 이름 헤더,
+   * 그 아래는 아미노산 서열입니다.)
+   * 입력이 끝나면 Ctrl + D 를 눌러 저장하고 종료합니다.
+     
+```
+>Test
+ACDEFGHIKLMNPQRSTVWY
+```
+
+```
+echo -e ">Test\nACDEFGHIKLMNPQRSTVWY" > test.fasta
+```
+
+```
+ls
+cat test.fasta
+```
+
+   * **test_run.py**
+```
+from colabfold import run
+import os
+
+# 입력 파일 (FASTA)
+fasta_path = "test.fasta"
+
+# 출력 폴더
+out_dir = "test_output"
+os.makedirs(out_dir, exist_ok=True)
+
+# 예측 옵션 — 기본 설정
+job = run(
+    input_fasta=fasta_path,
+    output_dir=out_dir,
+    model_type="auto",       # 또는 "monomer", "multimer"
+    num_models=1,
+    use_templates=False,
+    is_multimer=False,
+)
+
+print("Job result:", job)
+
+```
+
+```
+python test_run.py
+```
+
+
+
+
+
+
+
+
 ## Isaac Gym 설정
 ```bash
 conda deactivate
