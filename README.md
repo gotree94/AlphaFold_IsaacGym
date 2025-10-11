@@ -109,17 +109,20 @@ pip install --upgrade "jax[cuda12]"
 ```
 
 ## 2. Isaac Gym 설치
-**Isaac Gym은 NVIDIA에서 직접 다운로드해야 합니다.**
-**Isaac Gym 다운로드 방법:**
-**1.NVIDIA 계정으로 다운로드:**
+** Isaac Gym은 NVIDIA에서 직접 다운로드해야 합니다.**
+** Isaac Gym 다운로드 방법:**
+
+** 1.NVIDIA 계정으로 다운로드:**
    * https://developer.nvidia.com/isaac-gym
    * "Join now" 클릭하여 NVIDIA Developer 계정 생성/로그인
    * "Download" 버튼 클릭
    * IsaacGym_Preview_4_Package.tar.gz 다운로드
-**2.MobaXterm으로 파일 전송:**
+     
+** 2.MobaXterm으로 파일 전송:**
    * MobaXterm 왼쪽 사이드바에서 파일 업로드
    * 또는 SFTP로 전송
-**3.서버에서 설치:**
+
+** 3.서버에서 설치:**
 
 ```bash
 # Isaac Gym 환경 생성
