@@ -49,4 +49,21 @@ Sat Oct 11 14:26:31 2025
 ```
 
 # 드라이버 모듈 확인
+
+```
 lsmod | grep nvidia
+```
+
+```
+nvidia_uvm           2170880  0
+nvidia_drm            139264  4
+nvidia_modeset       1744896  6 nvidia_drm
+nvidia              14360576  73 nvidia_uvm,nvidia_modeset
+nvidia_wmi_ec_backlight    12288  0
+ecc                    45056  2 ecdh_generic,nvidia
+video                  77824  6 nvidia_wmi_ec_backlight,asus_wmi,asus_nb_wmi,xe,i915,nvidia_modeset
+wmi                    28672  5 video,nvidia_wmi_ec_backlight,asus_wmi,wmi_bmof,mfd_aaeon
+
+```
+
+
