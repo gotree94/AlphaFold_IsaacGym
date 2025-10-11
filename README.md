@@ -1,4 +1,10 @@
-# AlphaFold_IsaacGym
+# AI Solution
+
+  * ROG Strix SCAR 16 G635LX-RW047W
+    * Intel® Core™ Ultra 9 Processor 275HX 2.7 GHz (36MB Cache, up to 5.4 GHz, 24 cores, 24 Threads); Intel® AI Boost NPU up to 13
+    * 64GB DDR5-5600 SO-DIMN
+    * NVIDIA® GeForce RTX™ 5090 Laptop GPU (24GB GDDR7)
+    * Ubuntu 22.04 LTS
 
   * ✅ Isaac Gym      : 완벽 (최고 성능)
   * ✅ AlphaFold      : 완벽 (대형 단백질 처리)
