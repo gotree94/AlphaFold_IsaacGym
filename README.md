@@ -6,6 +6,12 @@
   * ✅ Clara          : 완벽 (Enterprise 워크로드)
   * ⚠️ BioNeMo        : 양호 (중형 모델까지, 대형은 양자화 필요)
 
+  * https://www.nvidia.com/en-us/industries/healthcare-life-sciences/
+  * https://www.nvidia.com/en-us/clara/medical-imaging/
+  * https://www.nvidia.com/en-us/clara/medical-devices/
+  * https://www.nvidia.com/en-us/clara/digital-health/
+  * https://www.nvidia.com/en-us/clara/genomics/
+  * https://www.nvidia.com/en-us/clara/biopharma/
 
 ## Open Kernel Module 드라이버 설치
 **1. 현재 드라이버 제거**
