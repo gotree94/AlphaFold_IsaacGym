@@ -1,4 +1,4 @@
-# Ubuntu 22.04 LTS: 4TB + 2TB 디스크 분리 사용 가이드
+# AlpaFold 및 AlpaMayo 설치를 위한 Ubuntu 22.04 LTS: 4TB + 2TB 디스크 분리 사용 가이드
 
 ## 개요
 
