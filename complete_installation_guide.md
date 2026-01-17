@@ -111,26 +111,26 @@ sudo dd if=ubuntu-22.04.4-desktop-amd64.iso of=/dev/sdX bs=4M status=progress sy
 1. Primary vs Logical
 | 옵션 | 설명 | 선택 |
 |------|------|--------|
-| Primary | 독립적인 주 파티션|  ✅ 이거 선택| 
-| Logical| 확장 파티션 안에 만드는 하위 파티션| 사용 안 함| 
+| Primary | 독립적인 주 파티션 |  ✅ 이거 선택 | 
+| Logical | 확장 파티션 안에 만드는 하위 파티션 | 사용 안 함 | 
 
 * GPT 파티션 테이블(최신 UEFI 시스템)에서는 사실 이 구분이 의미 없어. 그냥 Primary 선택.
 
 2. Beginning vs End of this space
 | 옵션 | 설명 | 선택 |
 |------|------|--------|
-| Beginning of this space| 디스크 앞쪽부터 할당| ✅ 이거 선택| 
-| End of this space| 디스크 뒤쪽부터 할당| 사용 안 함| 
+| Beginning of this space | 디스크 앞쪽부터 할당 | ✅ 이거 선택 | 
+| End of this space | 디스크 뒤쪽부터 할당 | 사용 안 함 | 
 
 * 디스크 앞쪽부터 순차적으로 배치하는 게 일반적이야.
 
 3. 파일시스템 타입
 | 파티션| Use as| 선택|
 |------|------|--------|
-| EFI| EFI System Partition| 드롭다운에서 선택| 
-| /boot| ext4 journaling file system| ✅ 맞아| 
-| swap| swap area| 드롭다운에서 선택| 
-| / (루트)| ext4 journaling file system| ✅ 맞아| 
+| EFI | EFI System Partition | 드롭다운에서 선택 | 
+| /boot | ext4 journaling file system | ✅ 맞아 | 
+| swap | swap area | 드롭다운에서 선택 | 
+| / (루트) | ext4 journaling file system | ✅ 맞아|  
 
 실제 설정 예시 (4개 파티션)
 ```
