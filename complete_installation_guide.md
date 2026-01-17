@@ -192,6 +192,137 @@ Device for boot loader installation: [/dev/nvme0n1]
 
 ---
 
+1. 우선 Ubuntu 설치 완료하기
+일단 노트북 내장 화면으로 설치 마무리해.
+2. NVIDIA 드라이버 설치
+설치 완료 후 터미널에서:
+bash# 시스템 업데이트
+sudo apt update && sudo apt upgrade -y
+
+# 권장 드라이버 확인
+ubuntu-drivers devices
+
+# 자동 설치
+sudo ubuntu-drivers autoinstall
+
+# 재부팅
+sudo reboot
+3. 재부팅 후 HDMI 확인
+bash# NVIDIA 드라이버 확인
+nvidia-smi
+
+# 연결된 디스플레이 확인
+xrandr
+
+그래도 안 되면
+NVIDIA 설정에서 확인
+bashnvidia-settings
+Display Configuration에서 외부 모니터가 보이는지 확인.
+Prime 프로파일 확인
+ROG 노트북은 하이브리드 그래픽(Intel + NVIDIA)이라 Prime 설정이 필요할 수 있어:
+bash# 현재 모드 확인
+prime-select query
+
+# NVIDIA 모드로 전환 (외부 출력 활성화)
+sudo prime-select nvidia
+sudo reboot
+
+
+색상 프로파일이나 케이블 연결 문제일 가능성이 높아.
+빠른 확인 순서
+1. 케이블/연결 확인 (물리적)
+
+HDMI 케이블 다시 뽑았다 연결
+다른 HDMI 포트가 있으면 변경해보기
+가능하면 다른 케이블로 테스트
+
+2. NVIDIA 설정에서 색상 확인
+bashnvidia-settings
+X Server Display Configuration → 해당 모니터 선택 → Advanced... 또는 Controls 탭에서:
+
+Color Correction / Color Range 확인
+Full RGB vs Limited RGB 설정 변경해보기
+
+3. 색상 범위 강제 설정
+bash# 연결된 디스플레이 이름 확인
+xrandr
+
+# 예: HDMI-0 또는 HDMI-1-0 같은 이름이 보임
+# Full RGB 강제 적용 (HDMI-0을 실제 이름으로 변경)
+xrandr --output HDMI-0 --set "Broadcast RGB" "Full"
+4. 그래도 안 되면 - xrandr로 색상 프로파일 리셋
+bash# 감마값 리셋 (1:1:1이 정상)
+xrandr --output HDMI-0 --gamma 1:1:1
+
+그러면 색상 범위(RGB Range) 설정 문제일 가능성이 높아. 이걸 먼저 확인해보자.
+1. 현재 디스플레이 이름 확인
+bashxrandr | grep " connected"
+출력 예시: HDMI-1-0 connected 또는 HDMI-0 connected
+2. Broadcast RGB 설정 변경
+bash# 디스플레이 이름 확인 후 (예: HDMI-1-0)
+# 현재 설정 확인
+xrandr --prop | grep -A 5 "HDMI"
+
+# Full RGB로 변경 시도
+xrandr --output HDMI-1-0 --set "Broadcast RGB" "Full"
+
+# 안 되면 Limited로 시도
+xrandr --output HDMI-1-0 --set "Broadcast RGB" "Limited 16:235"
+3. NVIDIA 설정에서 변경 (더 확실한 방법)
+bashnvidia-settings
+왼쪽 메뉴에서:
+
+X Server Display Configuration → 외부 모니터 선택
+Advanced... 클릭
+Color Controls 또는 Color Range 찾기
+Full ↔ Limited 전환해보기
+
+또는:
+
+Display Device 섹션에서 해당 모니터 선택
+Controls → Color Space 또는 Dynamic Range
+Full RGB (0-255) 선택
+
+4. 그래도 안 되면 - 모니터 자체 설정
+모니터 OSD 메뉴(모니터 버튼)에서:
+
+HDMI Black Level → Normal 또는 Low
+Color Range → Full 또는 RGB
+Input Color Format → RGB
+
+Ubuntu에서 화면 분할하는 방법 몇 가지 있어.
+1. 기본 기능 (2분할)
+
+Super(윈도우키) + ← : 왼쪽 절반
+Super + → : 오른쪽 절반
+
+2. gTile 확장 (PowerToys처럼 자유 분할) ✅ 추천
+bash# GNOME 확장 관리자 설치
+sudo apt install gnome-shell-extension-manager -y
+
+Extension Manager 앱 실행
+Browse 탭에서 "gTile" 검색
+Install 클릭
+활성화 후 Super + Enter로 그리드 분할 사용
+
+3. Tiling Assistant (더 쉬움)
+Extension Manager에서 "Tiling Assistant" 검색 후 설치
+
+드래그로 화면 가장자리/모서리에 창 배치
+2분할, 4분할, 6분할 등 지원
+
+4. Pop Shell (자동 타일링)
+bashsudo apt install gnome-shell-extension-pop-shell -y
+재로그인 후 자동으로 창이 타일처럼 배치됨.
+
+빠른 설치 (gTile)
+bash# 확장 관리자 설치 후
+sudo apt install gnome-shell-extension-manager -y
+그 다음 앱 메뉴에서 Extension Manager 실행 → gTile 검색 → 설치
+Super + Enter 누르면 그리드가 나와서 원하는 크기로 분할할 수 있어!
+
+---
+
 # Part 2: 디스크 구성 (4TB + 2TB 분리)
 
 ## 2.1 디스크 확인
