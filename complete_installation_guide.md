@@ -342,6 +342,27 @@ lsblk
 # sdb         1.8T  disk            ← 2TB
 ```
 
+```
+gotree94@gotree94-ROG-Strix-SCAR-16-G635LX-G635LX:~$ lsblk
+NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+loop0         7:0    0     4K  1 loop /snap/bare/5
+loop1         7:1    0  74.3M  1 loop /snap/core22/1612
+loop2         7:2    0 271.2M  1 loop /snap/firefox/4848
+loop3         7:3    0 505.1M  1 loop /snap/gnome-42-2204/176
+loop4         7:4    0  91.7M  1 loop /snap/gtk-common-themes/1535
+loop5         7:5    0  12.9M  1 loop /snap/snap-store/1113
+loop6         7:6    0  38.8M  1 loop /snap/snapd/21759
+loop7         7:7    0   500K  1 loop /snap/snapd-desktop-integration/178
+nvme0n1     259:0    0   3.6T  0 disk 
+├─nvme0n1p1 259:1    0   487M  0 part /boot/efi
+├─nvme0n1p2 259:2    0   977M  0 part /boot
+├─nvme0n1p3 259:3    0  29.8G  0 part [SWAP]
+└─nvme0n1p4 259:4    0   3.6T  0 part /
+nvme1n1     259:5    0   1.9T  0 disk 
+├─nvme1n1p1 259:6    0   512M  0 part 
+└─nvme1n1p2 259:7    0   1.9T  0 part 
+```
+
 ## 2.2 파티션 생성
 
 ```bash
