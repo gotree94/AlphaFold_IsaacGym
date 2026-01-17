@@ -107,6 +107,88 @@ sudo dd if=ubuntu-22.04.4-desktop-amd64.iso of=/dev/sdX bs=4M status=progress sy
 
 ---
 
+## 파티션 생성 옵션 정리
+1. Primary vs Logical
+| 옵션 | 설명 | 선택 |
+|------|------|--------|
+| Primary | 독립적인 주 파티션|  ✅ 이거 선택| 
+| Logical| 확장 파티션 안에 만드는 하위 파티션| 사용 안 함| 
+
+* GPT 파티션 테이블(최신 UEFI 시스템)에서는 사실 이 구분이 의미 없어. 그냥 Primary 선택.
+
+2. Beginning vs End of this space
+| 옵션 | 설명 | 선택 |
+|------|------|--------|
+| Beginning of this space| 디스크 앞쪽부터 할당| ✅ 이거 선택| 
+| End of this space| 디스크 뒤쪽부터 할당| 사용 안 함| 
+
+* 디스크 앞쪽부터 순차적으로 배치하는 게 일반적이야.
+
+3. 파일시스템 타입
+| 파티션| Use as| 선택|
+|------|------|--------|
+| EFI| EFI System Partition| 드롭다운에서 선택| 
+| /boot| ext4 journaling file system| ✅ 맞아| 
+| swap| swap area| 드롭다운에서 선택| 
+| / (루트)| ext4 journaling file system| ✅ 맞아| 
+
+실제 설정 예시 (4개 파티션)
+```
+파티션 1: EFI
+Size:          512 MB
+Type:          Primary
+Location:      Beginning of this space
+Use as:        EFI System Partition
+Mount point:   (자동 설정됨)
+```
+
+파티션 2: /boot
+```
+Size:          1024 MB
+Type:          Primary
+Location:      Beginning of this space
+Use as:        ext4 journaling file system
+Mount point:   /boot
+```
+
+파티션 3: swap
+```
+Size:          32000 MB (또는 RAM과 동일하게)
+Type:          Primary
+Location:      Beginning of this space
+Use as:        swap area
+Mount point:   (없음)
+```
+
+파티션 4: / (루트)
+```
+Size:          나머지 전부 (빈칸 두면 자동으로 남은 공간 전체)
+Type:          Primary
+Location:      Beginning of this space
+Use as:        ext4 journaling file system
+Mount point:   /
+```
+
+최종 화면 예시
+```
+┌─────────────────────────────────────────────────────────────────┐
+│ Device              Type      Size      Use as           Mount  │
+├─────────────────────────────────────────────────────────────────┤
+│ /dev/nvme0n1                  1TB                               │
+│   /dev/nvme0n1p1   primary   512MB    EFI System Part.         │
+│   /dev/nvme0n1p2   primary   1GB      ext4              /boot  │
+│   /dev/nvme0n1p3   primary   32GB     swap                     │
+│   /dev/nvme0n1p4   primary   ~966GB   ext4              /      │
+│                                                                 │
+│ /dev/sda                      4TB      (건드리지 않음)          │
+│ /dev/sdb                      2TB      (건드리지 않음)          │
+└─────────────────────────────────────────────────────────────────┘
+
+Device for boot loader installation: [/dev/nvme0n1]
+```
+
+---
+
 # Part 2: 디스크 구성 (4TB + 2TB 분리)
 
 ## 2.1 디스크 확인
