@@ -140,12 +140,20 @@ lsblk /dev/nvme1n1
 ## 2.3 파일시스템 생성
 
 ```bash
-# ext4 포맷 (라벨 지정)
-sudo mkfs.ext4 -L "Storage" /dev/sda1
-sudo mkfs.ext4 -L "Workspace" /dev/sdb1
+# ext4 포맷
+sudo mkfs.ext4 -L "Workspace" /dev/nvme1n1p1
 
-# 라벨 확인
-sudo blkid /dev/sda1 /dev/sdb1
+# 마운트 포인트 생성
+sudo mkdir -p /mnt/workspace
+
+# 마운트
+sudo mount /dev/nvme1n1p1 /mnt/workspace
+
+# 소유권 설정
+sudo chown -R $USER:$USER /mnt/workspace
+
+# 확인
+df -h /mnt/workspace
 ```
 
 ## 2.4 마운트 포인트 생성 및 마운트
