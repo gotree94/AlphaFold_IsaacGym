@@ -471,6 +471,51 @@ EOF
 source ~/.bashrc
 ```
 
+* 파일 경로가 변경된 것 같아. 다른 방법으로 설치하자:
+```bash
+# LocalColabFold 저장소 클론
+git clone https://github.com/YoshitakaMo/localcolabfold.git
+cd localcolabfold
+
+# 설치 스크립트 실행
+bash install_colabbatch_linux.sh
+```
+
+* 또는 스크립트 파일명이 바뀌었을 수 있으니 확인:
+
+```bash
+# 저장소 클론 후 파일 목록 확인
+git clone https://github.com/YoshitakaMo/localcolabfold.git
+cd localcolabfold
+ls -la *.sh
+bash run_colabfoldbatch_sample.sh
+```
+
+* 설치 방법이 pixi로 바뀌었네. 새로운 방식으로 설치하자:
+
+* 1. pixi 설치
+```bash
+curl -fsSL https://pixi.sh/install.sh | sh
+```
+
+* 설치 후 터미널 재시작하거나:
+```bash
+source ~/.bashrc
+```
+
+* 2. LocalColabFold 설치
+```bash
+cd ~/projects/alphafold/localcolabfold
+pixi install && pixi run setup
+```
+
+* 3. 설치 확인 후 테스트
+
+```bash
+bash run_colabfoldbatch_sample.sh
+```
+
+
 ## 6.3 모델 파라미터 다운로드
 
 ```bash
