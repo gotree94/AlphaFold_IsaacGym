@@ -403,6 +403,13 @@ pip install -e source/isaaclab_tasks
 
 ## 5.4 RL 라이브러리 설치
 
+* rsl-rl은 pip에서 직접 설치가 안 돼. GitHub에서 설치해야 해:
+```
+bash# RSL-RL 설치 (GitHub에서)
+pip install git+https://github.com/leggedrobotics/rsl_rl.git
+```
+
+
 ```bash
 # RSL-RL (가장 많이 사용)
 pip install rsl-rl
