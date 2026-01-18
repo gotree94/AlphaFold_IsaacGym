@@ -508,6 +508,16 @@ source ~/.bashrc
 cd ~/projects/alphafold/localcolabfold
 pixi install && pixi run setup
 ```
+* PATH에 추가하자:
+
+```bash
+bash# PATH 추가
+echo 'export PATH="$HOME/projects/alphafold/localcolabfold/.pixi/envs/default/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc
+
+# 확인
+colabfold_batch --help
+```
 
 * 3. 설치 확인 후 테스트
 
