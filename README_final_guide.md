@@ -362,6 +362,10 @@ mkdir -p /mnt/workspace/tmp
 ## 5.1 Conda 환경 생성
 
 ```bash
+# 약관 동의
+conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main
+conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
+
 # Python 3.11 필수 (Isaac Sim 5.x 요구사항)
 conda create -n isaaclab python=3.11 -y
 conda activate isaaclab
