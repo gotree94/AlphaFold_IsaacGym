@@ -129,16 +129,12 @@ lsblk
 ## 2.2 파티션 생성
 
 ```bash
-# 4TB 디스크 (sda)
-sudo parted /dev/sda --script mklabel gpt
-sudo parted /dev/sda --script mkpart primary ext4 0% 100%
-
-# 2TB 디스크 (sdb)
-sudo parted /dev/sdb --script mklabel gpt
-sudo parted /dev/sdb --script mkpart primary ext4 0% 100%
+# 2TB 디스크 (nvme1n1)
+sudo parted /dev/nvme1n1 --script mklabel gpt
+sudo parted /dev/nvme1n1 --script mkpart primary ext4 0% 100%
 
 # 확인
-lsblk /dev/sda /dev/sdb
+lsblk /dev/nvme1n1
 ```
 
 ## 2.3 파일시스템 생성
