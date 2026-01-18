@@ -160,14 +160,13 @@ df -h /mnt/workspace
 
 ```bash
 # 마운트 포인트 생성
-sudo mkdir -p /mnt/storage /mnt/workspace
+sudo mkdir -p /mnt/workspace
 
 # 마운트
-sudo mount /dev/sda1 /mnt/storage
-sudo mount /dev/sdb1 /mnt/workspace
+sudo mount /dev/nvme1n1p1 /mnt/workspace
 
 # 확인
-df -h /mnt/storage /mnt/workspace
+df -h /mnt/workspace
 ```
 
 ## 2.5 자동 마운트 설정 (fstab)
@@ -177,12 +176,7 @@ df -h /mnt/storage /mnt/workspace
 sudo cp /etc/fstab /etc/fstab.backup
 
 # fstab에 추가
-sudo tee -a /etc/fstab << 'EOF'
-
-# Data Disks (4TB + 2TB)
-LABEL=Storage    /mnt/storage    ext4    defaults,noatime    0    2
-LABEL=Workspace  /mnt/workspace  ext4    defaults,noatime    0    2
-EOF
+echo 'LABEL=Workspace  /mnt/workspace  ext4  defaults,noatime  0  2' | sudo tee -a /etc/fstab
 
 # 검증 (오류 없어야 함)
 sudo mount -a
@@ -196,25 +190,23 @@ sudo reboot
 
 ```bash
 # 현재 사용자에게 소유권 부여
-sudo chown -R $USER:$USER /mnt/storage
 sudo chown -R $USER:$USER /mnt/workspace
 ```
 
 ## 2.7 디렉토리 구조 생성
 
 ```bash
-# Storage (4TB) - 대용량/정적 데이터
-mkdir -p /mnt/storage/{alphafold-db,alpamayo-dataset,archives}
-
-# Workspace (2TB) - 활성 작업
-mkdir -p /mnt/workspace/{projects,models,cache,downloads,tmp}
-mkdir -p /mnt/workspace/projects/{alphafold,alpamayo,isaaclab}
+# Workspace (2TB) - 데이터/캐시 저장소
+mkdir -p /mnt/workspace/{datasets,models,cache,outputs,tmp}
+mkdir -p /mnt/workspace/datasets/{alphafold-db,alpamayo}
 mkdir -p /mnt/workspace/cache/{pip,huggingface,torch}
 
-# 홈에서 쉽게 접근하도록 심볼릭 링크
-ln -s /mnt/storage ~/storage
+# 홈 디렉토리 (4TB) - 프로젝트 코드
+mkdir -p ~/projects/{alphafold,alpamayo,isaaclab}
+mkdir -p ~/projects/alphafold/{inputs,outputs}
+
+# 심볼릭 링크 (편의용)
 ln -s /mnt/workspace ~/workspace
-ln -s /mnt/workspace/projects ~/projects
 ```
 
 ---
