@@ -1,5 +1,9 @@
 # AlphaFold/ColabFold 설치 및 사용 가이드
 
+
+<img width="1442" height="1370" alt="Screenshot from 2026-02-04 03-58-39" src="https://github.com/user-attachments/assets/d91c565a-70da-42b1-b560-6b0b1c64403f" />
+
+
 ## 개요
 
 **ColabFold**는 AlphaFold2를 로컬에서 실행할 수 있게 해주는 도구입니다. 전체 데이터베이스(~2.5TB) 없이도 단백질 구조 예측이 가능합니다.
