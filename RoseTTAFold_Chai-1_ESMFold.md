@@ -46,15 +46,46 @@ conda activate RoseTTAFold
 
 ### 데이터베이스 다운로드
 
+> ⚠️ **주의**: 스크립트 파일이 없으므로 직접 다운로드해야 합니다.
+
 ```bash
-# UniRef30 (필수, ~50GB)
-./scripts/download_uniref30.sh
+# 데이터베이스 저장 디렉토리로 이동
+cd ~/projects/rosettafold/RoseTTAFold
 
-# BFD (선택, ~270GB)
-./scripts/download_bfd.sh
+# UniRef30 (필수, ~46GB 압축 / ~87GB 압축해제)
+wget http://wwwuser.gwdg.de/~compbiol/uniclust/2020_06/UniRef30_2020_06_hhsuite.tar.gz
+mkdir -p UniRef30_2020_06
+tar xfz UniRef30_2020_06_hhsuite.tar.gz -C ./UniRef30_2020_06
 
-# Structure templates (선택, ~100GB)
-./scripts/download_pdb100.sh
+# BFD (선택, ~272GB 압축 / ~1.8TB 압축해제)
+wget https://bfd.mmseqs.com/bfd_metaclust_clu_complete_id30_c90_final_seq.sorted_opt.tar.gz
+mkdir -p bfd
+tar xfz bfd_metaclust_clu_complete_id30_c90_final_seq.sorted_opt.tar.gz -C ./bfd
+
+# Structure templates (필수, ~81GB)
+wget https://files.ipd.uw.edu/pub/RoseTTAFold/pdb100_2021Mar03.tar.gz
+tar xfz pdb100_2021Mar03.tar.gz
+```
+
+### 모델 가중치 다운로드
+
+```bash
+cd ~/projects/rosettafold/RoseTTAFold
+wget https://files.ipd.uw.edu/pub/RoseTTAFold/weights.tar.gz
+tar xfz weights.tar.gz
+```
+
+### lddt 설치 문제 해결
+
+`install_dependencies.sh` 실행 시 lddt 다운로드 실패(404 오류)가 발생할 수 있습니다.
+
+```bash
+# 대안: conda로 lddt 설치
+conda activate RoseTTAFold
+conda install -c bioconda lddt -y
+
+# 또는 OpenStructure에서 직접 빌드
+# https://openstructure.org/docs/install/
 ```
 
 ### 사용법
